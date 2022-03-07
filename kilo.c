@@ -525,7 +525,7 @@ int editorSyntaxToColor(int hl) {
     case HL_KEYWORD2: return 32;    /* green */
     case HL_STRING: return 35;      /* magenta */
     case HL_NUMBER: return 31;      /* red */
-    case HL_MATCH: return 34;      /* blu */
+    case HL_MATCH: return 34;      /* blue */
     default: return 37;             /* white */
     }
 }
@@ -1207,6 +1207,7 @@ void editorProcessKeypress(int fd) {
             quit_times--;
             return;
         }
+        printf("\e[1;1H\e[2J");  // clear the terminal in the end
         exit(0);
         break;
     case CTRL_S:        /* Ctrl-s */
@@ -1215,11 +1216,14 @@ void editorProcessKeypress(int fd) {
     case CTRL_F:
         editorFind(fd);
         break;
+    case CTRL_H:  /* Ctrl-h*/
+        editorSetStatusMessage("HELP: Ctrl-S = save | Ctrl-Q = quit | Ctrl-F = find");   
+        break;
     case BACKSPACE:     /* Backspace */
-    case CTRL_H:        /* Ctrl-h */
     case DEL_KEY:
         editorDelChar();
         break;
+
     case PAGE_UP:
     case PAGE_DOWN:
         if (c == PAGE_UP && E.cy != 0)
@@ -1293,6 +1297,7 @@ int main(int argc, char **argv) {
         fprintf(stderr,"Usage: kilo <filename>\n");
         exit(1);
     }
+
 
     initEditor();
     editorSelectSyntaxHighlight(argv[1]);
