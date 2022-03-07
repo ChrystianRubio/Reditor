@@ -1,36 +1,10 @@
-/* Kilo -- A very simple editor in less than 1-kilo lines of code (as counted
- *         by "cloc"). Does not depend on libcurses, directly emits VT100
- *         escapes on the terminal.
- *
- * -----------------------------------------------------------------------
- *
- * Copyright (C) 2016 Salvatore Sanfilippo <antirez at gmail dot com>
- *
- * All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are
- * met:
- *
- *  *  Redistributions of source code must retain the above copyright
- *     notice, this list of conditions and the following disclaimer.
- *
- *  *  Redistributions in binary form must reproduce the above copyright
- *     notice, this list of conditions and the following disclaimer in the
- *     documentation and/or other materials provided with the distribution.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
- * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
- * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
- * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
- * HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
- * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
- * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+/* -----------------------------------------------------------------------
+
+Kilo -- A very simple editor in 
+        Does not depend on libcurses, directly emits VT100
+        escapes on the terminal.
+ 
+--------------------------------------------------------------------------*/
 
 #define KILO_VERSION "0.0.1"
 
@@ -146,7 +120,7 @@ void editorSetStatusMessage(const char *fmt, ...);
  * matches and keywords. The file name matches are used in order to match
  * a given syntax with a given file name: if a match pattern starts with a
  * dot, it is matched as the last past of the filename, for example ".c".
- * Otherwise the pattern is just searched inside the filenme, like "Makefile").
+ * Otherwise the pattern is just searched inside the filename, like "Makefile").
  *
  * The list of keywords to highlight is just a list of words, however if they
  * a trailing '|' character is added at the end, they are highlighted in
@@ -183,6 +157,26 @@ char *C_HL_keywords[] = {
         "void|","short|","auto|","const|","bool|",NULL
 };
 
+/*
+
+char *Python_HL_extensions[] = {".py",NULL};
+char *Python_HL_keywords[] = {
+	/* python Keywords 
+    "and","as","assert"	,"break","class","continue"	,"def","del","elif",	
+    "else",	"except","False","finally", "for","from","global",
+    "if", "import"	,"is"	,"lambda"	,"None"	,"nonlocal"	,"not","or"	
+    ,"pass"	,"raise","return","True","try","while","with","yield",
+
+
+	/* python types 
+        "str|","int|","float|","char|","complex|","list|",
+        "tuple|","range|","dict|","set|","bool|", "frozenset|", 
+        "bytes|", "bytearray|", "memoryview|",NULL
+};
+
+*/
+
+
 /* Here we define an array of syntax highlights by extensions, keywords,
  * comments delimiters and flags. */
 struct editorSyntax HLDB[] = {
@@ -190,6 +184,9 @@ struct editorSyntax HLDB[] = {
         /* C / C++ */
         C_HL_extensions,
         C_HL_keywords,
+        /* python */
+        //Python_HL_extensions,
+        //Python_HL_keywords,
         "//","/*","*/",
         HL_HIGHLIGHT_STRINGS | HL_HIGHLIGHT_NUMBERS
     }
@@ -894,7 +891,7 @@ void editorRefreshScreen(void) {
             if (E.numrows == 0 && y == E.screenrows/3) {
                 char welcome[80];
                 int welcomelen = snprintf(welcome,sizeof(welcome),
-                    "Kilo editor -- verison %s\x1b[0K\r\n", KILO_VERSION);
+                    "Kilo editor -- version %s\x1b[0K\r\n", KILO_VERSION);
                 int padding = (E.screencols-welcomelen)/2;
                 if (padding) {
                     abAppend(&ab,"~",1);
