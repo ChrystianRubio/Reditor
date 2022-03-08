@@ -1,7 +1,7 @@
-all: kilo
+all: reditor
 
-kilo: kilo.c
-	$(CC) -o kilo kilo.c 
+kilo: reditor.c
+	$(CC) -o reditor reditor.c 
 
 clean:
-	rm kilo
+	rm reditor

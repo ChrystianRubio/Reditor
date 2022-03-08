@@ -1,9 +1,9 @@
-Kilo
+Reditor
 ===
 
-Kilo is a small text editor.
+Reditor is a small text editor.
 
-Usage: `kilo <filename>`
+Usage: `reditor <filename>`
 
 Keys:
 
@@ -16,5 +16,5 @@ Keys:
 !["Reditor screenshot"](Screenshot.png "Reditor screenshot") 
 
 
-Kilo does not depend on any library (not even curses). It uses fairly standard
+Does not depend on any library (not even curses). It uses fairly standard
 VT100 (and similar terminals) escape sequences.
