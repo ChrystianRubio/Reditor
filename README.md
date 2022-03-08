@@ -3,8 +3,6 @@ Kilo
 
 Kilo is a small text editor.
 
-A screencast is available here: https://asciinema.org/a/90r2i9bq8po03nazhqtsifksb
-
 Usage: `kilo <filename>`
 
 Keys:
@@ -13,6 +11,10 @@ Keys:
     CTRL-Q: Quit
     CTRL-H: HELP
     CTRL-F: Find string in file (ESC to exit search, arrows to navigate)
+
+
+!["Reditor screenshot"](Screenshot.png "Reditor screenshot") 
+
 
 Kilo does not depend on any library (not even curses). It uses fairly standard
 VT100 (and similar terminals) escape sequences.
